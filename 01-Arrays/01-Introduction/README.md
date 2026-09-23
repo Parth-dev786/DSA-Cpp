@@ -924,7 +924,7 @@ means:
 
 # 26. Self-Teaching Questions
 
-Try answering these **without looking at the notes**.
+ answering these **without looking at the notes**.
 
 ### Basic Understanding
 
@@ -1030,8 +1030,6 @@ Total memory: 20 bytes
 
 
 ## ✅ Final Self-Test
-
-Before moving forward, you should be able to explain this without notes:
 
 > **What happens in memory when I create `int arr[5]`, and how does C++ find `arr[3]`?**
 
