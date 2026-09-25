@@ -180,3 +180,37 @@ Therefore, analyze both:
 Time Complexity
 +
 Space Complexity
+------------------------------------------------
+
+Some important function :-
+#include <algorithm>
+
+sort(arr, arr + n);
+
+sort() — Descending Order
+sort(arr, arr + n, greater<int>());
+
+swap()
+swap(a, b);
+
+reverse():-
+reverse(arr, arr + n);
+
+min()
+Returns the smaller value
+
+max()
+Returns the larger value.
+
+is_sorted()
+
+Very useful for checking whether an array/range is already sorted.
+
+is_sorted(arr, arr + n);
+
+---------------------------
+sort(arr, arr + n);        // actually sorts
+is_sorted(arr, arr + n);   // only checks
+
+
+
