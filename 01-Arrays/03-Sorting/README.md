@@ -141,9 +141,9 @@ The choice of sorting algorithm depends on the problem requirements.
 When studying a sorting algorithm, consider:
 
 Property	Meaning
-Time Complexity	How the amount of work grows with input size
-Space Complexity	How much additional memory is required
-Stability	Whether equal elements keep their relative order
+Time Complexity > How the amount of work grows with input size
+Space Complexity > 	How much additional memory is required
+Stability >	Whether equal elements keep their relative order
 In-Place	Whether the algorithm mainly rearranges the original data
 Comparisons	Number of element comparisons
 Swaps	Number of element rearrangements
