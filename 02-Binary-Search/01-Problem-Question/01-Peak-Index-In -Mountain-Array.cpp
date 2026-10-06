@@ -1,5 +1,6 @@
 # Peak Index in a Mountain Array
 
+---------------------------------------------------------------------------------------------------------------------------
 ## 1. Problem
 
 Given a **mountain array**, find the index of its peak element.
@@ -68,7 +69,7 @@ end = mid - 1;
 
 > **Check the peak first → otherwise identify the slope → eliminate half of the array.**
 
----
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 3. Algorithm
 
@@ -89,7 +90,7 @@ arr[mid - 1]
 arr[mid + 1]
 ```
 
----
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 4. Code
 
@@ -130,7 +131,7 @@ public:
 };
 ```
 
----
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 5. Dry Run
 
@@ -308,3 +309,61 @@ while (start <= end):
 
 **Time:** `O(log n)`
 **Space:** `O(1)`
+
+------------------------------------------------------------------------------------------------------
+--> Self check 
+
+## Self-Check
+
+### Why can we use Binary Search?
+
+A mountain array has:
+
+```text
+Increasing → Peak → Decreasing
+```
+
+By checking `arr[mid]` with its neighbors, we can determine which side contains the peak and **discard half of the search space**.
+
+So binary search can be used even though the complete array is not sorted.
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+### Why not Linear Search?
+
+Linear search checks elements one by one:
+
+```text
+Time  = O(n)
+Space = O(1)
+```
+
+Binary search eliminates half of the elements in every step:
+
+```text
+Time  = O(log n)
+Space = O(1)
+```
+
+For `n = 10^15`:
+
+```text
+Linear Search  → up to 10^15 checks
+Binary Search  → about 50 checks
+```
+
+Because:
+
+```text
+log₂(10^15) ≈ 50
+```
+
+So binary search **greatly reduces the number of checks and saves time for large inputs**.
+
+---
+
+### Key Point
+
+> **Linear Search:** check one by one → `O(n)`
+> **Binary Search:** eliminate half each time → `O(log n)`
+
