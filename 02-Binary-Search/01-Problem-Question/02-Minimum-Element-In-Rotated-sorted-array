@@ -1,0 +1,253 @@
+# Minimum Element in a Rotated Sorted Array
+
+## 1. Problem Statement
+
+Given an array that was originally sorted in ascending order and then rotated, find its minimum element.
+
+**Example**
+
+```text
+Input:  [4, 5, 6, 7, 1, 2, 3]
+Output: 1
+```
+
+The array was originally sorted, but some elements from the beginning were moved to the end.
+
+## 2. Why Do We Need This Algorithm?
+
+A simple solution is to check every element and find the smallest value.
+
+- Linear search: `O(n)` time.
+- Binary-search-based solution: `O(log n)` time under the required input assumptions.
+
+Binary search is useful because the rotated array retains enough ordering information to eliminate part of the search range during each iteration.
+
+## 3. Core Idea
+
+Use the first element, `arr[0]`, as a reference point.
+
+For the standard version of this problem with distinct elements:
+
+- If `arr[mid] >= arr[0]`, move the search to the right.
+- If `arr[mid] < arr[0]`, save `arr[mid]` as a candidate and search to the left.
+
+Initialize `ans = arr[0]` so that an array that was never rotated also returns the correct minimum.
+
+## 4. C++ Implementation
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int findMin(int arr[], int n) {
+    int start = 0;
+    int end = n - 1;
+    int mid;
+    int ans = arr[0];
+
+    while (start <= end) {
+        mid = start + (end - start) / 2;
+
+        if (arr[mid] >= arr[0]) {
+            start = mid + 1;
+        } else {
+            ans = arr[mid];
+            end = mid - 1;
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    int arr[1000];
+    int n;
+
+    cout << "Enter the number of elements in array: ";
+    cin >> n;
+
+    if (n < 1 || n > 1000) {
+        cout << "Invalid array size." << endl;
+        return 1;
+    }
+
+    cout << "Enter array elements: ";
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    cout << findMin(arr, n) << endl;
+
+    return 0;
+}
+```
+
+## 5. Code Explanation
+
+| Variable | Purpose                               |
+| -------- | ------------------------------------- |
+| `start`  | Beginning of the current search range |
+| `end`    | End of the current search range       |
+| `mid`    | Middle index of the current range     |
+| `ans`    | Smallest candidate found so far       |
+| `arr[0]` | Fixed reference element               |
+
+### Case 1: Middle element is greater than or equal to the first element
+
+```cpp
+if (arr[mid] >= arr[0]) {
+    start = mid + 1;
+}
+```
+
+The middle element belongs to the first section of the rotated array. Move right to look for the minimum.
+
+### Case 2: Middle element is smaller than the first element
+
+```cpp
+else {
+    ans = arr[mid];
+    end = mid - 1;
+}
+```
+
+A potential minimum has been found. Save its value and continue searching to the left.
+
+### Why use `ans`?
+
+A candidate may be the minimum, but the algorithm continues checking whether a smaller candidate exists. The saved answer is returned when the search finishes.
+
+## 6. Dry Run
+
+Input:
+
+```text
+arr = [4, 5, 6, 7, 1, 2, 3]
+```
+
+The fixed reference is `arr[0] = 4`.
+
+| Iteration | start | end | mid | arr[mid] | Action            | ans |
+| --------- | ----: | --: | --: | -------: | ----------------- | --: |
+| 1         |     0 |   6 |   3 |        7 | Move right        |   4 |
+| 2         |     4 |   6 |   5 |        2 | Save 2, move left |   2 |
+| 3         |     4 |   4 |   4 |        1 | Save 1, move left |   1 |
+
+Now `start = 4` and `end = 3`.
+
+Because `start > end`, the loop terminates.
+
+Output:
+
+```text
+1
+```
+
+## 7. Time and Space Complexity
+
+**Time complexity: `O(log n)`**
+
+Each iteration discards a portion of the search range, so the number of iterations grows logarithmically with the array size.
+
+**Auxiliary space complexity: `O(1)`**
+
+Only a fixed number of integer variables are used. No additional array is created.
+
+## 8. Important Edge Cases
+
+### Array was not rotated
+
+```text
+[1, 2, 3, 4, 5]
+```
+
+The algorithm returns `1` because `ans` starts as `arr[0]`.
+
+### One element
+
+```text
+[8]
+```
+
+The algorithm returns `8`.
+
+### Empty array
+
+The function must not be called with `n = 0`, because `arr[0]` would be invalid. Validate the input before calling the function.
+
+### Duplicate elements
+
+This implementation is not correct for every rotated array containing duplicates.
+
+For example:
+
+```text
+[1, 0, 1, 1, 1]
+```
+
+It returns `1`, although the minimum is `0`.
+
+The comparison against `arr[0]` cannot always distinguish the relevant sections when duplicate values are present. This implementation is intended for the distinct-element version of the problem.
+
+## 9. When to Use This Algorithm
+
+Use it when:
+
+- The array was sorted in ascending order and then rotated.
+- You need the minimum element.
+- The standard distinct-element assumption holds.
+- You want logarithmic time rather than checking every element.
+
+Do not use this specific implementation for arbitrary unsorted arrays or when duplicate values must be handled correctly.
+
+## 10. Common Mistakes
+
+1. Returning `mid` instead of `arr[mid]`. The former is an index; the latter is the element value.
+2. Forgetting to initialize `ans`.
+3. Updating `start` or `end` incorrectly, potentially causing an infinite loop.
+4. Assuming that the algorithm works for every array containing duplicates.
+5. Accessing `arr[0]` when the array is empty.
+6. Confusing the first element, `arr[0]`, with the current middle element, `arr[mid]`.
+
+## 11. Self-Teaching Questions
+
+1. Why does the algorithm use `arr[0]` as a reference?
+2. Why is `ans` initialized to `arr[0]`?
+3. Why do we continue searching after finding a candidate?
+4. What makes binary search more efficient than a linear scan here?
+5. Why does the loop stop when `start > end`?
+6. What input assumption does this implementation require?
+7. What happens if the array is empty?
+
+## 12. Small Practice
+
+Trace the algorithm using:
+
+```text
+[6, 7, 8, 2, 3, 4, 5]
+```
+
+Write down the values of `start`, `end`, `mid`, and `ans` after every iteration.
+
+Then test the program with:
+
+```text
+[1, 2, 3, 4, 5]
+[8]
+[4, 5, 1, 2, 3]
+```
+
+## 13. Quick Revision
+
+- **Goal:** Find the minimum in a rotated sorted array.
+- **Reference:** `arr[0]`.
+- **Initial answer:** `ans = arr[0]`.
+- **If `arr[mid] >= arr[0]`:** Move right.
+- **If `arr[mid] < arr[0]`:** Save the candidate and move left.
+- **Loop condition:** `start <= end`.
+- **Time:** `O(log n)`.
+- **Auxiliary space:** `O(1)`.
+- **Limitation:** This implementation can fail when duplicates are present.
+- **Important:** The input must be non-empty.
+
