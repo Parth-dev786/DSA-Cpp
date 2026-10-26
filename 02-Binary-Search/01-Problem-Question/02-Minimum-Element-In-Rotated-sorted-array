@@ -32,6 +32,7 @@ For the standard version of this problem with distinct elements:
 - If `arr[mid] < arr[0]`, save `arr[mid]` as a candidate and search to the left.
 
 Initialize `ans = arr[0]` so that an array that was never rotated also returns the correct minimum.
+--------------------------------------------------------------------------------------------------------
 
 ## 4. C++ Implementation
 
@@ -81,7 +82,7 @@ int main() {
 
     return 0;
 }
-```
+---------------------------------------------------------------------------------------------------------------------
 
 ## 5. Code Explanation
 
@@ -152,6 +153,7 @@ Each iteration discards a portion of the search range, so the number of iteratio
 
 **Auxiliary space complexity: `O(1)`**
 
+-------------------------------------------------------------------
 Only a fixed number of integer variables are used. No additional array is created.
 
 ## 8. Important Edge Cases
@@ -190,6 +192,12 @@ It returns `1`, although the minimum is `0`.
 
 The comparison against `arr[0]` cannot always distinguish the relevant sections when duplicate values are present. This implementation is intended for the distinct-element version of the problem.
 
+-------------------------------------------------------------------------------------------------------------------
+#important
+1. first we check the array is in rotated and sorted and the logic we write sometimes it is not work if array contain duplicate element
+like if we have [ 1 0 1 1 1 ] in this it is not give correct because it contain dupicate element
+
+-----------------------------------------------------------------------------------------------------------
 ## 9. When to Use This Algorithm
 
 Use it when:
