@@ -108,3 +108,40 @@ Initialize ans = n so that the code also works when the answer lies beyond the l
 Return:
 
 ans + k
+---------------------------------------------------------------------------------------------------------
+
+CODE FOR Kth Missing positive integer
+------------------------------------
+
+#include <iostream>
+using namespace std;
+
+int BinarySearch(int arr[], int n, int k) {
+    int start = 0;
+    int end = n - 1;
+    int mid, ans = n;
+
+    while (start <= end) {
+        mid = start + (end - start) / 2;
+
+        if (arr[mid] - mid - 1 >= k) {
+            ans = mid;
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+
+    return ans + k;
+}
+
+int main() {
+    int arr[] = {2, 3, 4, 7, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 5;
+
+    cout << BinarySearch(arr, n, k);
+
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------
