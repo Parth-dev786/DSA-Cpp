@@ -1,0 +1,110 @@
+Kth Missing Positive Number — Binary Search
+
+1. Problem Statement
+
+Given a sorted array of distinct positive integers arr and an integer k, find the kth missing positive integer.
+
+Example:
+
+arr = {2, 3, 4, 7, 11};
+k = 5;
+
+Output:
+
+9
+
+Explanation:
+
+The missing positive integers are 1, 5, 6, 8, 9, 10, ....
+
+The 5th missing positive integer is 9.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Approach
+
+We use Binary Search to find the position where the number of missing positive integers becomes greater than or equal to k.
+
+Key Observation
+
+For an element at index i:
+
+missing = arr[i] - i - 1;
+
+Why?
+
+arr[i] tells us the current number.
+
+i + 1 represents how many positive integers should be present up to that position if none were missing.
+
+Their difference gives the number of missing positive integers before arr[i].
+
+Example:
+
+arr = {2, 3, 4, 7, 11};
+
+Index (i)
+
+arr[i]
+
+Missing = arr[i] - i - 1
+
+0
+
+2
+
+1
+
+1
+
+3
+
+1
+
+2
+
+4
+
+1
+
+3
+
+7
+
+3
+
+4
+
+11
+
+6
+
+For k = 5, the first index where the missing count is at least 5 is index 4.
+---------------------------------------------------------------------------------------------------------------------------------
+
+3. Binary Search Logic
+
+Initialize start = 0 and end = n - 1.
+
+Calculate the middle index:
+
+mid = start + (end - start) / 2;
+
+Calculate the missing count:
+
+arr[mid] - mid - 1
+
+If the missing count is greater than or equal to k:
+
+Store mid in ans.
+
+Search the left half using end = mid - 1.
+
+Otherwise:
+
+Search the right half using start = mid + 1.
+
+Initialize ans = n so that the code also works when the answer lies beyond the last array element.
+
+Return:
+
+ans + k
