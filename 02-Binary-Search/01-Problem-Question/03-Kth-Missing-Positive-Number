@@ -151,5 +151,13 @@ Time and Space Complexity
 Time Complexity: O(log n) — Binary Search reduces the search range by half in each iteration.
 
 Auxiliary Space Complexity: O(1) — Only a constant number of variables are used.
+-------------------------------------------------------------------------------------------------------------------------------
 
+Applications of Kth Missing Positive Number
+-------------------------------------------
+1. Finding Missing IDs: Identify missing positive numbers in a sorted list of user IDs, product IDs, or ticket numbers.
+2. Inventory Management: Find the kth missing product number in a sorted sequence of product identifiers.
+3. Number Sequence Analysis: Determine missing numbers in a sorted sequence without checking every positive integer one by one.
+4. Resource Allocation: Identify missing numbered slots or positions in a sequential allocation system.
+5. Interview Problem Solving: Practice Binary Search on a monotonic condition, which is useful for solving more advanced DSA problems.
 
