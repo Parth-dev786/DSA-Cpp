@@ -1,0 +1,45 @@
+Algorithm
+
+Algorithm: Book Allocation
+
+Input:
+    Array arr[] containing pages of N books
+    M = number of students
+
+Step 1:
+    If M > N:
+        Return -1
+
+Step 2:
+    Initialize:
+        start = maximum element of arr[]
+        end = sum of all elements of arr[]
+        ans = -1
+
+Step 3:
+    While start <= end:
+
+        mid = start + (end - start) / 2
+
+        count = 1
+        page = 0
+
+        Step 4:
+        For i = 0 to N-1:
+
+            page = page + arr[i]
+
+            If page > mid:
+                count = count + 1
+                page = arr[i]
+
+        Step 5:
+        If count <= M:
+            ans = mid
+            end = mid - 1
+
+        Else:
+            start = mid + 1
+
+Step 6:
+    Return ans
