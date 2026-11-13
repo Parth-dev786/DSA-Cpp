@@ -43,3 +43,67 @@ Step 3:
 
 Step 6:
     Return ans
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+//code 
+
+#include<iostream>
+using namespace std;
+
+int main() {
+
+    int M, count, mid, start, end, ans = -1, n;
+    int arr[100];
+
+    cout << "Enter number of students: ";
+    cin >> M;
+
+    cout << "Enter number of books: ";
+    cin >> n;
+
+    cout << "Enter pages of books:\n";
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    start = arr[0];
+    end = 0;
+
+    for(int i = 0; i < n; i++){
+        if(arr[i] > start)
+            start = arr[i];
+        end += arr[i];
+    }
+
+    while(start <= end){
+
+        count = 1;
+        int page = 0;
+
+        mid = start + (end - start) / 2;
+
+        for(int i = 0; i < n; i++){
+
+            page += arr[i];
+
+            if(page > mid){
+                count++;
+                page = arr[i];
+            }
+        }
+
+        if(count <= M){
+            ans = mid;
+            end = mid - 1;
+        }
+        else{
+            start = mid + 1;
+        }
+    }
+
+    cout << "Minimum maximum pages = " << ans;
+
+    return 0;
+}
